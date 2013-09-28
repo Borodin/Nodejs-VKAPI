@@ -17,6 +17,7 @@ VK.api('users.get', {
 })
 ```
 [Список методов API vk.com](http://vk.com/dev/methods)
+
 [Серверная авторизация](http://vk.com/dev/auth_sites)
 
 ### Методы ###
