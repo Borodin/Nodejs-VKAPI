@@ -16,6 +16,8 @@ VK.api('users.get', {
 	console.log(data.response);
 })
 ```
+[Список методов API vk.com](http://vk.com/dev/methods)
+[Серверная авторизация](http://vk.com/dev/auth_sites)
 
 ### Методы ###
 ```VK.init(access_token, [api_version]);``` Метод необходимый для инициализации модуля
