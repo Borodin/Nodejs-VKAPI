@@ -17,6 +17,6 @@ VK.api('users.get', {
 ```
 
 ### Методы ###
-```js VK.init(access_token, [api_version]);``` Метод необходимый для инициализации модуля
-```js VK.api(mathod, [params], callback);``` Метод обращеня к vk API
+```VK.init(access_token, [api_version]);``` Метод необходимый для инициализации модуля
+```VK.api(mathod, [params], callback);``` Метод обращеня к vk API
 
