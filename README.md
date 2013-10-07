@@ -17,8 +17,10 @@ VK.api('users.get', {
 	console.log(data.response);
 })
 ```
-[Список методов API vk.com](http://vk.com/dev/methods)
+При верном ```[access_token]``` данный запро вернет объект
+```[ { id: 1, first_name: 'Павел', last_name: 'Дуров' } ]```
 
+[Список методов API vk.com](http://vk.com/dev/methods)
 [Серверная авторизация](http://vk.com/dev/auth_sites)
 
 ### Методы ###
