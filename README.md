@@ -22,7 +22,7 @@ VK.api('users.get', {
 ```[ { id: 1, first_name: 'Павел', last_name: 'Дуров' } ]```
 
 ###Получение access_token###
-Для того чтобы получить access_token, необходимо отправить HTTP запрос
+Для того чтобы получить тестовый access_token, можно отправить HTTP запрос
 ```
 https://oauth.vk.com/authorize
 ?client_id=4626668
