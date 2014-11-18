@@ -1,13 +1,13 @@
 var https = require('https');
-var open = require('open');
 var querystring = require('querystring');
 var readline = require('readline');
+//var open = require('open');
 
+var error_log = true;
+var access_token, apiversion;
+var delay = 0;
 var rl = readline.createInterface({input: process.stdin,output: process.stdout});
 
-
-var access_token, apiversion;
-var lastRequest = 0;
 
 exports.init = function(token, v){
 	access_token = token;
@@ -16,10 +16,13 @@ exports.init = function(token, v){
 
 
 exports.api = function(methodName, params, callback){
-	if(!callback){callback=params;params=''}
+	if(!callback){ callback=params; params='' }
+
 	params.access_token = access_token;
 	params.v = apiversion;
+
 	var post_data = querystring.stringify(params);
+
 	setTimeout(function(){
 		var req = https.request({
 			hostname: 'api.vk.com',
@@ -32,28 +35,33 @@ exports.api = function(methodName, params, callback){
 			}
 		}, function(res) {
 			var json = '';
-			res.on('data',function(data){json+=data;});
-			res.on('error', function(e) {console.error(e);});
+			res.on('data',function(data){json += data});
+			res.on('error', function(e) {console.error(e)});
 			res.on('end', function(){
 				var response = JSON.parse(json);
 				if('error' in response){
 					var error = response.error;
-					if(error.error_code==14){
-						open(error.captcha_img)
-						rl.question("Enter the code from the image "+error.captcha_img, function(answer) {
+					if(error.error_code == 14){
+						//open(error.captcha_img);
+						cansole.log('captcha_img', error.captcha_img)
+						rl.question("Enter the code from the image " + error.captcha_img, function(answer) {
 							params.captcha_sid = error.captcha_sid;
 							params.captcha_key = answer;
 						 	exports.api(methodName, params, callback);
 						});
 					}else {
-						console.error('ERROR '+error.error_code+' '+error.error_msg);
-						console.log(error.request_params);
+						if(error_log){
+							console.error('ERROR ' + error.error_code + ' ' + error.error_msg);
+							console.log(error.request_params);
+						}
+						callback(error);
 					}
-				}else callback(response);
+				}else callback(false, response);
 			});
 		});
 		req.write(post_data);
 		req.end();
-	},400-(new Date().getTime()-lastRequest));
-	lastRequest = new Date().getTime()
+		delay = 0;
+	}, delay);
+	delay+=400;
 }
