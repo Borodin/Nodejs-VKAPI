@@ -8,7 +8,7 @@ Nodejs-VKAPI
 ### Использование ###
 
 ```js
-var VK = require('./vk_api');
+var VK = require('./vk-api');
 VK.init([access_token]);
 
 VK.api('users.get', {
