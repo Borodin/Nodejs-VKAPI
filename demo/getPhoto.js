@@ -8,7 +8,7 @@ var dir = 'photo';
 var count = 0;
 var downloads = 0;
 
-VK.init();
+VK.init('[access_token]');
 fs.mkdir(dir, getAlbums);
 
 
