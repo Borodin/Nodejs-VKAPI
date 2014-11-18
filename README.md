@@ -9,16 +9,29 @@ Nodejs-VKAPI
 
 ```js
 var VK = require('./vk_api');
-VK.init('[access_token]');
+VK.init([access_token]);
 
 VK.api('users.get', {
 	user_ids: 1
-},function(data) {
+},function(err, data) {
 	console.log(data.response);
 })
 ```
-При верном ```[access_token]``` данный запро вернет объект
+В данном запросе ```[access_token]``` указывать не обязательно, запроc вернет объект:
+
 ```[ { id: 1, first_name: 'Павел', last_name: 'Дуров' } ]```
+
+###Получение access_token###
+Для того чтобы получить access_token, необходимо отправить Http запрос
+```
+https://oauth.vk.com/authorize
+?client_id=4626668
+&scope=2080255
+&redirect_uri=https://oauth.vk.com/blank.html
+&response_type=token
+&v=API_5.7
+```
+и скопировать из адресной строки ```token```
 
 [Список методов API vk.com](http://vk.com/dev/methods)
 
@@ -26,5 +39,6 @@ VK.api('users.get', {
 
 ### Методы ###
 ```VK.init(access_token, [api_version]);``` Метод необходимый для инициализации модуля
+
 ```VK.api(method, [params], callback);``` Метод обращеня к vk API
 
