@@ -49,6 +49,10 @@ exports.api = function(methodName, params, callback){
 							params.captcha_key = answer;
 						 	exports.api(methodName, params, callback);
 						});
+					}else if(error.error_code==6){
+						//console.log("Too much requests");
+						setTimeout(function(){exports.api(methodName, params, callback)},400);
+					}
 					}else {
 						if(error_log){
 							console.error('ERROR ' + error.error_code + ' ' + error.error_msg);
